@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dec Salary Calculator</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      #main-content {
+        flex-grow: 1; /* Allow the main content to grow and push the footer to the bottom */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #calculator {
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+
+      input {
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        box-shadow: 1px 1px 5px #ddd;
+      }
+
+      #output {
+        font-weight: bold;
+        margin-top: 10px;
+        font-size: 18px;
+      }
+
+      #submitBtn {
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #submitBtn.newQuery {
+        background-color: #4285f4;
+      }
+
+      footer {
+        margin-top: 20px;
+        font-family: monospace;
+        text-align: center;
+        padding: 10px;
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main-content">
+      <div id="calculator">
+        <h1>What should I get paid?</h1>
+        <label>Previous Salary £ <input type="text" id="prevSalary" /></label
+        ><br />
+        <label>New Salary £ <input type="text" id="newSalary" /></label><br />
+        <button id="submitBtn" onclick="calculate()">Submit</button>
+        <div id="output"></div>
+      </div>
+    </div>
+
+    <footer>
+      Lovingly created by Rosie 👩🏻‍💻. Life is better with one less spreadsheet 💚.
+    </footer>
+
+    <script>
+      function calculate() {
+        var prevSalary = parseFloat(
+          document.getElementById("prevSalary").value
+        );
+        var newSalary = parseFloat(document.getElementById("newSalary").value);
+
+        if (isNaN(prevSalary) || isNaN(newSalary)) {
+          document.getElementById("output").innerText = "Check your numbers";
+        } else {
+          var result = prevSalary / 52 + (newSalary / 52) * 3;
+          document.getElementById("output").innerText =
+            "Result: £" + result.toFixed(2);
+        }
+
+        var submitBtn = document.getElementById("submitBtn");
+        submitBtn.classList.add("newQuery");
+        submitBtn.innerText = "New Query";
+
+        submitBtn.onclick = function () {
+          document.getElementById("prevSalary").value = "";
+          document.getElementById("newSalary").value = "";
+          document.getElementById("output").innerText = "";
+          submitBtn.classList.remove("newQuery");
+          submitBtn.innerText = "Submit";
+          submitBtn.onclick = calculate;
+        };
+      }
+    </script>
+  </body>
+</html>
