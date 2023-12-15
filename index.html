@@ -14,7 +14,7 @@
       }
 
       #main-content {
-        flex-grow: 1; /* Allow the main content to grow and push the footer to the bottom */
+        flex-grow: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -41,17 +41,28 @@
         font-size: 18px;
       }
 
-      #submitBtn {
+      #buttonContainer {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      #submitBtn,
+      #clearBtn {
         padding: 10px;
-        background-color: #4caf50;
-        color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        width: 48%;
       }
 
-      #submitBtn.newQuery {
-        background-color: #4285f4;
+      #submitBtn {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      #clearBtn {
+        background-color: #f44336;
+        color: white;
       }
 
       footer {
@@ -70,7 +81,10 @@
         <label>Previous Salary £ <input type="text" id="prevSalary" /></label
         ><br />
         <label>New Salary £ <input type="text" id="newSalary" /></label><br />
-        <button id="submitBtn" onclick="calculate()">Submit</button>
+        <div id="buttonContainer">
+          <button id="submitBtn" onclick="calculate()">Submit</button>
+          <button id="clearBtn" onclick="clearFields()">Clear Results</button>
+        </div>
         <div id="output"></div>
       </div>
     </div>
@@ -93,19 +107,12 @@
           document.getElementById("output").innerText =
             "Result: £" + result.toFixed(2);
         }
+      }
 
-        var submitBtn = document.getElementById("submitBtn");
-        submitBtn.classList.add("newQuery");
-        submitBtn.innerText = "New Query";
-
-        submitBtn.onclick = function () {
-          document.getElementById("prevSalary").value = "";
-          document.getElementById("newSalary").value = "";
-          document.getElementById("output").innerText = "";
-          submitBtn.classList.remove("newQuery");
-          submitBtn.innerText = "Submit";
-          submitBtn.onclick = calculate;
-        };
+      function clearFields() {
+        document.getElementById("prevSalary").value = "";
+        document.getElementById("newSalary").value = "";
+        document.getElementById("output").innerText = "";
       }
     </script>
   </body>
