@@ -130,10 +130,12 @@
 
     <script>
       function calculate() {
-        var prevSalary = parseFloat(
-          document.getElementById("prevSalary").value
-        );
-        var newSalary = parseFloat(document.getElementById("newSalary").value);
+        var prevSalaryInput = document.getElementById("prevSalary");
+        var newSalaryInput = document.getElementById("newSalary");
+
+        // Remove commas from input values
+        var prevSalary = parseFloat(prevSalaryInput.value.replace(/,/g, ""));
+        var newSalary = parseFloat(newSalaryInput.value.replace(/,/g, ""));
 
         if (isNaN(prevSalary) || isNaN(newSalary)) {
           document.getElementById("output").innerText = "Check your numbers";
